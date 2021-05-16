@@ -8,6 +8,7 @@ import { ChatViewModel } from '../models/chatviewmodel.model';
 })
 export class SignalRService {
   public data: ChatViewModel[];
+  public broadcastData: ChatViewModel[];
 
   private hubConnection: signalR.HubConnection;
 
@@ -27,5 +28,26 @@ export class SignalRService {
       this.data = data;
       console.log(data);
     })
+  }
+
+  public broadcastChatData = () => {
+    const data = this.data.map(m => {
+      const temp = {
+        data: m.data,
+        label: m.label
+      }
+      return temp;
+    });
+
+    this.hubConnection.invoke('broadcastChatData', data)
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  public addBroadcastChatDataListener = () => {
+    this.hubConnection.on('broadcastChatData', (data) => {
+      this.broadcastChatData = data;
+    });
   }
 }

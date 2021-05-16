@@ -5,3 +5,20 @@
         {{data.label}}
     </div>
 </div>
+
+<!-- Chat window viewer -->
+<div>
+
+</div>
+
+<!-- Chat window message -->
+<div>
+    <form [formGroup]="chatForm" (ngSubmit)="sendChatMessage()">
+        <div>
+            <input type="text" formControlName="chatText">
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</div>
