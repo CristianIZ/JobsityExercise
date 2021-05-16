@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "JSChatExcercise"
+    }
+  },
+  "defaultProject": "JSChatExcercise",
+  "cli": {
+    "analytics": "0e61447e-7e6b-45bb-bd5d-342f0b0b7508"
+  }
 }
