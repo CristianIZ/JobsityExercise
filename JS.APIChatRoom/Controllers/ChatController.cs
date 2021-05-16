@@ -1,0 +1,28 @@
+﻿using JS.APIChatRoom.HubConfig;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace JS.APIChatRoom.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ChatController : ControllerBase
+    {
+        private readonly IHubContext<ChatHub> _hub;
+
+        public ChatController(IHubContext<ChatHub> hub)
+        {
+            _hub = hub;
+        }
+
+        public IActionResult Get()
+        {
+            var timerManager = new TimerManager(() => _hub.Clients.All.SendAsync("transferChatData", DataManager.GetData()));
+            return Ok(new { Message = "Request Completed" });
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<p>chat-component works!</p>
+<div *ngIf='signalRService.data'>
+    <div *ngFor="let data of signalRService.data">
+        {{data.data}}
+        {{data.label}}
+    </div>
+</div>
